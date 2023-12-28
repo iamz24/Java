@@ -1,2 +1,1 @@
-Code dựa theo các session của Jmaster
-Section 5 ModelTeacher & ModelStudent giống nhau nên làm 1 cái teacher, student làm y hệt
+Code theo đề bài các session của Jmaster, nhưng tài nguyên chất xám thuộc quyền sở hữu cá nhân! Trân trọng!
