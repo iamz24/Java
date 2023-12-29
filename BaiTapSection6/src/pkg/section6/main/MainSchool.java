@@ -13,7 +13,6 @@ public class MainSchool {
 		int n = sc.nextInt();
 		ModelSchool[] school = new ModelSchool[n];
 		for (int i = 0; i < school.length; i++) {
-			school[i] = new ModelSchool();
 			System.out.println("Nhap thong tin truong thu "+(i+1)+": ");
 			school[i].input();
 			System.out.println("Da luu thong tin truong so: "+(i+1));
