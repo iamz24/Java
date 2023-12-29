@@ -16,6 +16,7 @@ public class MainStudent {
 		ModelStudent[] student = new ModelStudent[n];
 		for (int i = 0; i < student.length; i++) {
 			System.out.println("------------------------------");
+			student[i] = new ModelStudent();
 			System.out.println("Nhap thong tin sinh vien thu "+(i+1)+": ");
 			student[i].input();
 			System.out.println("=> Luu thanh cong sinh vien thu "+(i+1)+".");
