@@ -6,13 +6,7 @@ public class ModelCategory {
 	private int id;
 	private String name;
 	
-	public ModelCategory() {}
-	
-	public ModelCategory(int id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
+	public ModelCategory() {} //constructor default
 
 	public int getId() {
 		return id;
