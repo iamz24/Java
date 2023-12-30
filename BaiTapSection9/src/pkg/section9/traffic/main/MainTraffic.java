@@ -1,3 +1,5 @@
+//In bảng giá vé niêm yết
+
 package pkg.section9.traffic.main;
 
 import pkg.section9.traffic.model.ModelCar;
