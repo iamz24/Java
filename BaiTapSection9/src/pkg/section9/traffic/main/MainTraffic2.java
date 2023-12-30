@@ -1,3 +1,5 @@
+//Tra giá vé theo loại phương tiện nhập vào từ bàn phím
+
 package pkg.section9.traffic.main;
 
 import java.util.Scanner;
