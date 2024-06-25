@@ -29,8 +29,8 @@ public class LoginController extends HttpServlet {
 		User user = db.checkAccount(username, password);
 		if (user != null) {
 			HttpSession httpSession = req.getSession(); //nếu có thì lấy nếu chưa có thì tạo, ở đây là tạo
-			httpSession.setAttribute("name", user.getName());
-			httpSession.setAttribute("user", user);
+			httpSession.setAttribute("name", user.getName()); //set name để hiển thị, dùng name để check cũng được nhưng chú ý tránh trùng tên attribute
+			httpSession.setAttribute("user", user); //đăng nhập thành công thì set user để check
 			resp.sendRedirect(req.getContextPath() + "/user/service");
 		} else {
 			resp.sendRedirect(req.getContextPath()+"/login");
