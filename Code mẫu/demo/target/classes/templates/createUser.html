@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>User Add Information</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+
+    <body>
+		<!--Sử dụng multipart/formdata để đảm bảo tính toàn vẹn của file ảnh, và trong trường hợp 
+			không có file nó sẽ tính là trống nếu không nó sẽ là null dẫn tới không kiểm tra empty được-->
+        <form th:action="@{/admin/user/list/add}" method="post" enctype="multipart/form-data">
+            <div>
+                <label for="id">ID:</label>
+                <input type="number" name="id" id="id" placeholder="id">
+            </div>
+            <div>
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" placeholder="name">
+            </div>
+            <div>
+                <label for="age">Age: </label>
+                <input type="number" name="age" id="age" placeholder="age">
+            </div>
+			<div>
+				<label for="avatar">Upload avatar: </label>
+				<input type="file" name="file" id="avatar" accept="image/*"> <!--Chỉ chấp nhận ảnh-->
+			</div>
+            <div>
+                <button type="submit">Add</button>
+            </div>
+        </form>
+    </body>
+</html>

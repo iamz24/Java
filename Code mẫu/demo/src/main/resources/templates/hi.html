@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>Spring Boot by NVD</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+
+    <body>
+        <h1>Hello Spring MVC - Thymeleaf</h1>
+		<h2>Welcome admin,</h2>
+		<!--Thay vì sử dụng <%=%> như jsp thì thymeleaf sử dụng th:text="${...}", nó sẽ lấy dữ liệu trong {} 
+			để chèn vào giữa cái thẻ mà ta chỉ định, cho đó là nội dung của thẻ đó -->
+        <div>
+            <a th:href="@{/admin/user/list/add}">Add user information</a>
+        </div>
+        <div>
+            <a th:href="@{/admin/user/list}">View list</a>
+        </div>
+    </body>
+</html>

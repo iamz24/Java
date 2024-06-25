@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>User Edit Information</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+
+    <body>
+        <form th:action="@{/admin/user/list/edit}" method="post" enctype="multipart/form-data">
+            <div>
+                <label for="id">ID:</label>
+                <input readonly type="number" name="id" id="id" th:value="${user.id}"> <!--readonly là chỉ đọc không chỉnh sửa-->
+            </div>
+            <div>
+                <label for="name">Name:</label>
+                <input  readonly type="text" name="name" id="name" th:value="${user.name}">
+            </div>
+            <div>
+                <label for="age">Age: </label>
+                <input type="number" name="age" id="age" placeholder="age">
+            </div>
+			<div>
+				<label for="avatar">Upload avatar: </label>
+				<input type="file" name="file" id="avatar" accept="image/*" > <!--Chỉ chấp nhận ảnh-->
+			</div>			
+            <div>
+                <button type="submit">Update</button>
+            </div>
+        </form>
+    </body>
+</html>

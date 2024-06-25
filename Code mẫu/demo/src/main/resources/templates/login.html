@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>Login</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+
+    <body>
+		<!--Chèn như này khi đổi context path trong propoties thì nó tự động chèn vào không cần sửa-->
+        <form th:action="@{/login}" method="post"> 
+            <div>
+                <label for="username">Username: </label>
+                <input type="text" id="username" name="username" placeholder="Username">
+            </div>
+            <div>
+                <label for="password">Password: </label>
+                <input type="password" id="password" name="password" placeholder="Password">
+            </div>
+            <div>
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </body>
+</html>

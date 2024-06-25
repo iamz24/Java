@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="UTF-8">
+        <title>Detail</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+
+    <body>
+		<form th:action="@{/admin/user/list/search}" method="get" > 
+			<input type="text" name="searchName" id="search" placeholder="Enter name" th:value="${searchDto?.searchName}">
+			<!--Vì ban đầu /list chưa hề có dữ liệu của searchDto nên ta cần thêm dấu ? biểu thị cho việc nó có thể null-->
+			<input type="number" name="currentPage" id="page" placeholder="Enter page" th:value="${searchDto?.currentPage}">
+			<input type="number" name="size" id="size" placeholder="Enter size" th:value="${searchDto?.size}">
+			<input type="text" name="sortField" id="sortField" placeholder="Enter field" th:value="${searchDto?.sortField}">
+			<button type="submit">Search</button>
+		</form>
+		<table border="1px">
+			<thead>
+	            <tr>
+	                <th>ID</th>
+	                <th>NAME</th>
+	                <th>AGE</th>
+					<th>Avatar</th>
+					<th>ACTIONS</th>
+		
+	            </tr>
+	        </thead>
+	
+	        <tbody>
+	            <tr th:each="u : ${userList}"> <!--for each-->
+	                <td th:text="${u.id}"></td>
+	                <td th:text="${u.name}"></td>
+	                <td th:text="${u.age}"></td>
+					<td>
+						<img th:src="@{'/admin/user/download?filename=' + ${u.avatarURL}}" width="40%" height="40%"> <!--Thẻ ảnh để lấy ảnh-->
+					</td>
+	                <td>
+	                    <a th:href="@{'/admin/user/list/delete?id=' + ${u.id}}">Delete</a> <!--Thực hiện get với parameter id-->
+						<a th:href="@{'/admin/user/list/edit?id=' + ${u.id}}">Edit</a>
+	                </td>
+	            </tr>
+	        </tbody>
+		</table>
+    </body>
+</html>
