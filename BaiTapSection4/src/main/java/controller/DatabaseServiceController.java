@@ -20,14 +20,14 @@ public class DatabaseServiceController extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = req.getSession();
-		User user = (User)session.getAttribute("user");
-		if (user != null) {
+		User user = (User)session.getAttribute("user"); //lấy dữ liệu user ra
+		if (user != null) { //nếu user tồn tại, tức là có user từ phần login khi thành công thì sẽ hiển thị dữ liệu
 			List<User> listUser = db.getAll();
 			req.setAttribute("listUser", listUser);
 			
 			req.getRequestDispatcher("/views/DatabaseService.jsp").forward(req, resp);
 		} else {
-			resp.sendRedirect(req.getContextPath() + "/login");
+			resp.sendRedirect(req.getContextPath() + "/login"); //nếu không quay trở về login
 		}
 	}
 }
