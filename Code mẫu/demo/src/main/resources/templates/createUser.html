@@ -12,19 +12,19 @@
 			không có file nó sẽ tính là trống nếu không nó sẽ là null dẫn tới không kiểm tra empty được-->
         <form th:action="@{/admin/user/list/add}" method="post" enctype="multipart/form-data">
             <div>
-                <label for="id">ID:</label>
-                <input type="number" name="id" id="id" placeholder="id">
+                <label for="id" th:text = "#{user.id} + ':'"></label>
+                <input type="number" name="id" id="id" th:placeholder="#{user.id}">
             </div>
             <div>
-                <label for="name">Name:</label>
-                <input type="text" name="name" id="name" placeholder="name">
+                <label for="name" th:text="#{user.name} + ':'"></label> <!--Sử dụng thông điệp propoties-->
+                <input type="text" name="name" id="name" th:placeholder="#{user.name}">
             </div>
             <div>
-                <label for="age">Age: </label>
-                <input type="number" name="age" id="age" placeholder="age">
+                <label for="age" th:text="#{user.age} + ':'"></label>
+                <input type="number" name="age" id="age" th:placeholder="#{user.age}">
             </div>
 			<div>
-				<label for="avatar">Upload avatar: </label>
+				<label for="avatar" th:text="#{user.avatar.file} + ':'"></label>
 				<input type="file" name="file" id="avatar" accept="image/*"> <!--Chỉ chấp nhận ảnh-->
 			</div>
             <div>

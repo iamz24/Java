@@ -8,12 +8,20 @@
     </head>
 
     <body>
-		<form th:action="@{/admin/user/list/search}" method="get" > 
-			<input type="text" name="searchName" id="search" placeholder="Enter name" th:value="${searchDto?.searchName}">
+		<form th:action="@{/admin/user/list/search}" method="get" th:object="${searchDto}"> 
+			<!--Có 2 cách đặt th object một là addattri của phần trang khởi đầu đặt trùng với tên class, 2 là đặt tên modelattri cho class
+			rồi dùng đúng tên đó đặt cho trang khởi đầu ở đây là list-->
+			<input type="text" name="searchName" id="search" placeholder="Enter name" th:field="*{searchName}">
+			<p th:errors="*{searchName}"></p> <!-- thẻ errorKhi lỗi thì in ra dữ liệu lỗi mà trường searchName cung cấp-->
+			<!--th:field là map với thuộc tính của object, lúc ấy thì không cần name nữa vì khi làm validate không được đẩy requestparam nên
+			name là không cần thiết, tuy nhiên thay vì dùng field ta dùng value như truyền thống vẫn được ${searchDto.searchName}-->
+			<!--Khi sử dụng th:object và th:field thì yêu cầu cái đối tượng phải tồn tại do đó ta cần add nó vào phần /list để
+			khi truy cập có một cái đối tượng trống để dùng, và thêm nó vào trước phần if của control /search để tránh không tồn tại
+			do chưa xử lí tới-->
 			<!--Vì ban đầu /list chưa hề có dữ liệu của searchDto nên ta cần thêm dấu ? biểu thị cho việc nó có thể null-->
-			<input type="number" name="currentPage" id="page" placeholder="Enter page" th:value="${searchDto?.currentPage}">
-			<input type="number" name="size" id="size" placeholder="Enter size" th:value="${searchDto?.size}">
-			<input type="text" name="sortField" id="sortField" placeholder="Enter field" th:value="${searchDto?.sortField}">
+			<input type="number" name="currentPage" id="page" placeholder="Enter page" th:field="*{currentPage}">
+			<input type="number" name="size" id="size" placeholder="Enter size" th:field="*{size}">
+			<input type="text" name="sortField" id="sortField" placeholder="Enter field" th:value="*{sortField}">
 			<button type="submit">Search</button>
 		</form>
 		<table border="1px">

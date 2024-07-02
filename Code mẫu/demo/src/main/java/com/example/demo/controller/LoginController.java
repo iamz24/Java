@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpSession;
 
 @Controller //danh dau controler de chuong trinh biet
@@ -13,7 +15,6 @@ public class LoginController {
 	public String login() {
 		return "login.html";//trả về view
 	}
-	
 	@PostMapping("/login")
 	public String login(HttpSession session, @RequestParam("username") String username, @RequestParam("password") String password) { 
 		// giống servlet, sử dụng req và resp nên cần set, nhưng khi áp dụng spring vào thì không cần

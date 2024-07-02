@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import com.example.demo.service.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
@@ -32,6 +34,9 @@ public class UserController {
 		List<User> users = userService.getAll(); //lấy dữ liệu ra
 //		req.setAttribute("userList", users); //đẩy dữ liệu vào reqest, cách 1
 		model.addAttribute("userList", users); //cách 2 sử dụng model
+		model.addAttribute("searchDto", new searchDTO()); //trả về để đẩy lên views
+		/* phải đặt cùng tên với tên của model attribute của class, nếu class chưa đặt tên model thì phải trùng với tên class vì class
+		 khi đó sẽ mặc định rằng tên class sẽ là tên của model attribute */
 		return "users.html";
 	}
 	
@@ -59,8 +64,9 @@ public class UserController {
 	
 	@GetMapping("/admin/user/download") //?fileName = abc.jpg
 	public void download(@RequestParam("filename") String fileName, HttpServletResponse resp) throws IOException {
-		File file = new File("D:/"+fileName); //tạo 1 file mới với tên giống cái file cần lưu  
-		Files.copy(file.toPath(), resp.getOutputStream()); //copy cái file cần lưu vào đúng cái file vừa tạo và trả về hình ảnh
+		File file = new File("D:/"+fileName); //Tạo 1 đối tượng file chứa dữ liệu của file trong server  
+		Files.copy(file.toPath(), resp.getOutputStream()); 
+		//copy dữ liệu từ đó và đẩy ra ngoài
 		//download thì copy từ máy chủ gán vào response và trả về hình ảnh, đây thực ra không phải download mà là đẩy hình ảnh lên giao diện
 	}
 	
@@ -71,7 +77,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/admin/user/list/search")
-	public String searchByname( Model model, @ModelAttribute searchDTO searchDto) {
+	public String searchByname( Model model, @ModelAttribute("searchDto") @Valid searchDTO searchDto, BindingResult bindingResult) { //thêm valid để nhận validation
 //			@RequestParam("searchName") String searchName, 
 //			@RequestParam(name="currentPage", required = false) Integer currentPage, 
 //			//khi sử dụng integer kiểu đối tượng thì khi không có input nó sẽ bằng null
@@ -82,11 +88,13 @@ public class UserController {
 			// vì integer,... cùng các kiểu số khác không chứa khái niệm empty nên cần dùng required biến nó thành null để biểu thị sự bỏ trống
 //			@RequestParam(name="size", required = false) Integer size,
 //			@RequestParam("sortField")  String sortField) {
+		if (bindingResult.hasErrors()) { //@valid sẽ check nếu rơi vào error thì là has Error và trả về trang + trả về message lỗi để nếu ta gọi thì in ra
+			return "users.html"; //check nếu có lỗi thì return về views
+		} //bắt buộc đặt sau @valid annotation và không có bất kì cái gì trước nó
 		
 		Page<User> searchedUser = userService.searchByName(searchDto);
 		model.addAttribute("userList", searchedUser.getContent()); //trả về listUser dưới dạng list trong trang đó
 		model.addAttribute("totalPage", searchedUser.getTotalPages()); //trả về tổng số trang
-		model.addAttribute("searchDto", searchDto);
 		return "users.html";
 	}
 	
